@@ -33,10 +33,6 @@ namespace SADRI.Web.Ui.Services
 
         public IEnumerable<Product> GetProducts()
         {
-            // Return products by category or none if no category specified
-            //Product products = null;
-            //products = _productsRep.GetProductsByCategoryId((int)categoryId);
-            //products = _productsRep.Get((int)productId);
 
             IEnumerable<Product> products = _productsRep.GetAll();
 
@@ -47,6 +43,7 @@ namespace SADRI.Web.Ui.Services
             IEnumerable<Product> products = _implProductsRep.GetProductByCategoryId(idCategory);
 
             return products;
+            //Return object
 
         }
     }
