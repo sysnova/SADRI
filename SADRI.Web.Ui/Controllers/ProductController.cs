@@ -11,6 +11,7 @@ using SADRI.Infrastructure.Interfaces;
 
 namespace SADRI.Web.Ui.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         // GET: Product

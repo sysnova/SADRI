@@ -19,6 +19,15 @@ namespace SADRI.Web.Ui.App_Start
     using SADRI.Web.Ui.Services;
     using System.Collections.Generic;
 
+    //
+    using Microsoft.Owin.Security;
+    using NHibernate.AspNet.Identity;
+    using Microsoft.AspNet.Identity;
+    using SADRI.Web.Ui.ViewModels;
+    using SharpArch.NHibernate;
+    using NHibernate;
+    //
+
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -52,7 +61,13 @@ namespace SADRI.Web.Ui.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
+                //REGISTER USER
+                kernel.Bind<ISession>().ToMethod(x => NHibernateSession.Current);
+                kernel.Bind(typeof(IUserStore<ApplicationUser>)).To(typeof(UserStore<ApplicationUser>)).InRequestScope();
+                //
+                //ADD ROLE
+                kernel.Bind(typeof(IRoleStore<IdentityRole>)).To(typeof(RoleStore<IdentityRole>)).InRequestScope();
+                //
                 RegisterServices(kernel);
                 return kernel;
             }
