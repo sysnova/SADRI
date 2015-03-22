@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Transactions;
 //
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
@@ -13,24 +15,16 @@ namespace SADRI.Web.Ui.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<ApplicationUser> _userManager; //{ get; private set; }
-        private UserStore<ApplicationUser> _userStore; //{ get; set; }
+        private UserManager<ApplicationUser> _userManager;
+        private IAuthenticationManager _authenticationManager;
 
-        private IAuthenticationManager AuthenticationManager
+        public AccountController(UserManager<ApplicationUser> userManager, IAuthenticationManager AuthenticationManager)
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        public AccountController(UserManager<ApplicationUser> userManager, UserStore<ApplicationUser> userStore)
-        {
-            _userStore = userStore;
             _userManager = userManager;
+            _authenticationManager = AuthenticationManager;
+
         }
-
-
+        
         // GET: Account
         public ActionResult Register()
         {
@@ -45,21 +39,31 @@ namespace SADRI.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+
+                try
                 {
-                    await _userManager.AddToRoleAsync(user.Id, model.Rol);
-
-                    await SignInAsync(user, isPersistent: false);
-
+                    using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                    {
+                        var result = await _userManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded == false)
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                throw new Exception(error);
+                            }                            
+                        }
+                        await _userManager.AddToRoleAsync(user.Id, model.Rol);
+                        await SignInAsync(user, isPersistent: false);
+                        transaction.Complete();
+                    }
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                catch (Exception e)
                 {
-                    AddErrors(result);
-                }
-            }
+                    AddErrors(e.Message);
 
+                }                                
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -100,7 +104,7 @@ namespace SADRI.Web.Ui.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+            _authenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -116,18 +120,18 @@ namespace SADRI.Web.Ui.Controllers
             }
         }
 
-        private void AddErrors(IdentityResult result)
+        private void AddErrors(string error)
         {
-            foreach (var error in result.Errors)
-            {
+            //foreach (var error in result.Errors)
+            //{
                 ModelState.AddModelError("", error);
-            }
+            //}
         }
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            _authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+            _authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
 
     }

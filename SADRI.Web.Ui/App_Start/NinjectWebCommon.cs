@@ -66,7 +66,10 @@ namespace SADRI.Web.Ui.App_Start
                 kernel.Bind(typeof(IUserStore<ApplicationUser>)).To(typeof(UserStore<ApplicationUser>)).InRequestScope();
                 //
                 //ADD ROLE
-                kernel.Bind(typeof(IRoleStore<IdentityRole>)).To(typeof(RoleStore<IdentityRole>)).InRequestScope();
+                kernel.Bind(typeof(IRoleStore<ApplicationRole, string>)).To(typeof(RoleStore<ApplicationRole>)).InRequestScope();
+                //
+                //AUTHENTICATION_MANAGER
+                kernel.Bind<IAuthenticationManager>().ToMethod(x => HttpContext.Current.GetOwinContext().Authentication);
                 //
                 RegisterServices(kernel);
                 return kernel;

@@ -28,7 +28,8 @@
     var grid = new WebGrid(source: Model.ListRoles, canPage: false, canSort: false);
     }
     @grid.GetHtml(columns: grid.Columns(
-        grid.Column("Name", "Role Name")
+        grid.Column("Name", "Role Name"),
+        grid.Column("Description", "Role Description")
     ))
 
     @section Scripts {

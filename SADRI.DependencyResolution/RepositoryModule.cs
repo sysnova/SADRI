@@ -31,6 +31,7 @@ namespace SADRI.Infrastructure.DependencyResolution
 
             Bind<IProductRepository>().To<ProductRepository>();
 
+
         }
     }
 }

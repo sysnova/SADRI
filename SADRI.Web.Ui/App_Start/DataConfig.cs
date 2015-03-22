@@ -6,9 +6,7 @@ using System.IO;
 using NHibernate.AspNet.Identity;
 using NHibernate.AspNet.Identity.Helpers;
 //
-//using NHibernate.AspNet.Web.Models;
 using SADRI.Web.Ui.ViewModels;
-//
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
@@ -23,11 +21,17 @@ namespace SADRI.Web.Ui
         public static void Configure(ISessionStorage storage)
         {
             var internalTypes = new[] {
-                typeof(ApplicationUser)
+                typeof(ApplicationUser),
+                typeof(ApplicationRole)
+                //typeof(ApplicationRoleGroup),
+                //typeof(Group),
+                //typeof(ApplicationUserGroup)
+                //typeof(ApplicationPet)
             };
 
             var mapping = MappingHelper.GetIdentityMappings(internalTypes);
-            System.Diagnostics.Debug.WriteLine("LEO:///////////////////////// - " + mapping.AsString());
+            
+            System.Diagnostics.Debug.WriteLine(mapping.AsString());
 
             var configuration = NHibernateSession.Init(storage, mapping);
             //BuildSchema(configuration);

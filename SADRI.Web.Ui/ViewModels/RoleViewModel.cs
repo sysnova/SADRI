@@ -11,6 +11,6 @@ namespace SADRI.Web.Ui.ViewModels
         [Display(Name = "Name")]
         public string Name { get; set; }
         [Display(Name = "List Roles")]
-        public IEnumerable<IdentityRole> ListRoles { get; set; }
+        public IEnumerable<ApplicationRole> ListRoles { get; set; }
     }
 }

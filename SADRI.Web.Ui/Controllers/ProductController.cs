@@ -8,10 +8,11 @@ using SADRI.Domain.Entities;
 using SADRI.Web.Ui.ViewModels;
 using SADRI.Services.Interfaces;
 using SADRI.Infrastructure.Interfaces;
+using SADRI.Web.Ui.Filters;
 
 namespace SADRI.Web.Ui.Controllers
 {
-    [Authorize]
+    [CheckPermission("User")]
     public class ProductController : Controller
     {
         // GET: Product

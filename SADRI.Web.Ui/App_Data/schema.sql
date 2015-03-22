@@ -19,6 +19,10 @@ alter table AspNetUserClaims  drop constraint FKF4F7D992EA778823
 alter table ApplicationUser  drop constraint FK4376B148E75DF37
 
 
+    if exists (select 1 from sys.objects where object_id = OBJECT_ID(N'[FKA3588669820E5339]') AND parent_object_id = OBJECT_ID('ApplicationRole'))
+alter table ApplicationRole  drop constraint FKA3588669820E5339
+
+
     if exists (select * from dbo.sysobjects where id = object_id(N'AspNetUsers') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table AspNetUsers
 
     if exists (select * from dbo.sysobjects where id = object_id(N'AspNetUserRoles') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table AspNetUserRoles
@@ -30,6 +34,8 @@ alter table ApplicationUser  drop constraint FK4376B148E75DF37
     if exists (select * from dbo.sysobjects where id = object_id(N'AspNetUserClaims') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table AspNetUserClaims
 
     if exists (select * from dbo.sysobjects where id = object_id(N'ApplicationUser') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table ApplicationUser
+
+    if exists (select * from dbo.sysobjects where id = object_id(N'ApplicationRole') and OBJECTPROPERTY(id, N'IsUserTable') = 1) drop table ApplicationRole
 
     create table AspNetUsers (
         Id NVARCHAR(255) not null,
@@ -77,6 +83,12 @@ alter table ApplicationUser  drop constraint FK4376B148E75DF37
        primary key (applicationuser_key)
     )
 
+    create table ApplicationRole (
+        applicationrole_key NVARCHAR(255) not null,
+       Description NVARCHAR(255) null,
+       primary key (applicationrole_key)
+    )
+
     alter table AspNetUserRoles 
         add constraint FK86803B282B87AB2A 
         foreign key (RoleId) 
@@ -101,3 +113,8 @@ alter table ApplicationUser  drop constraint FK4376B148E75DF37
         add constraint FK4376B148E75DF37 
         foreign key (applicationuser_key) 
         references AspNetUsers
+
+    alter table ApplicationRole 
+        add constraint FKA3588669820E5339 
+        foreign key (applicationrole_key) 
+        references AspNetRoles

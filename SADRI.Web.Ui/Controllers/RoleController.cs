@@ -13,14 +13,14 @@ using SADRI.Web.Ui.ViewModels;
 
 namespace SADRI.Web.Ui.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize (Roles = "Admin")]
     public class RoleController : Controller
     {
-        private RoleStore<IdentityRole> _roleStore; //{ get; set; }
+        private RoleManager<ApplicationRole> _roleManager; //{ get; set; }
 
-        public RoleController(RoleStore<IdentityRole> roleStore)
+        public RoleController(RoleManager<ApplicationRole> roleManager)
         {
-            _roleStore = roleStore;
+            _roleManager = roleManager;
         }
 
         public ActionResult AddRole()
@@ -34,8 +34,8 @@ namespace SADRI.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole(model.Name);   
-                await _roleStore.CreateAsync(role);
+                var role = new ApplicationRole(model.Name, "Custom Rol");   
+                await _roleManager.CreateAsync(role);
                 return RedirectToAction("AddRole", "Role");
             }
             return View(model);
@@ -43,8 +43,8 @@ namespace SADRI.Web.Ui.Controllers
         
         private RoleViewModel GetRolesViewModel()
         {
-            IEnumerable<IdentityRole> roles = Enumerable.Empty<IdentityRole>();
-            roles = _roleStore.Roles;
+            IEnumerable<ApplicationRole> roles = Enumerable.Empty<ApplicationRole>();
+            roles = _roleManager.Roles;
             RoleViewModel roleViewModel = new RoleViewModel
             {
                 Name = "",
