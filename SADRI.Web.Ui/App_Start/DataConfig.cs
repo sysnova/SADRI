@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 //
 using System.IO;
-using NHibernate.AspNet.Identity;
 using NHibernate.AspNet.Identity.Helpers;
-//
 using SADRI.Web.Ui.ViewModels;
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
-using SharpArch.Domain.DomainModel;
 using SharpArch.NHibernate;
 //
 
