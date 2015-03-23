@@ -64,6 +64,7 @@ namespace SADRI.Web.Ui.App_Start
                 //REGISTER USER
                 kernel.Bind<ISession>().ToMethod(x => NHibernateSession.Current);
                 kernel.Bind(typeof(IUserStore<ApplicationUser>)).To(typeof(UserStore<ApplicationUser>)).InRequestScope();
+                //kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
                 //
                 //ADD ROLE
                 kernel.Bind(typeof(IRoleStore<ApplicationRole, string>)).To(typeof(RoleStore<ApplicationRole>)).InRequestScope();

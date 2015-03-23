@@ -2,27 +2,25 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Transactions;
 //
+using System.Transactions;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using NHibernate.AspNet.Identity;
 using SADRI.Web.Ui.ViewModels;
 //
-using SharpArch.NHibernate;
 
 namespace SADRI.Web.Ui.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private ApplicationUserManager _userManager;
         private IAuthenticationManager _authenticationManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IAuthenticationManager AuthenticationManager)
+        public AccountController(ApplicationUserManager userManager, IAuthenticationManager AuthenticationManager)
         {
             _userManager = userManager;
             _authenticationManager = AuthenticationManager;
-
         }
         
         // GET: Account
@@ -61,7 +59,6 @@ namespace SADRI.Web.Ui.Controllers
                 catch (Exception e)
                 {
                     AddErrors(e.Message);
-
                 }                                
             }
             // If we got this far, something failed, redisplay form
@@ -88,12 +85,28 @@ namespace SADRI.Web.Ui.Controllers
                 var user = await _userManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    if (user.LockoutEnabled)
+                    {
+                        ModelState.AddModelError("", "Invalid username or password Blocked.");
+                    }
+                    else
+                    {
+                        await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    try
+                    {
+                        user = await _userManager.FindByNameAsync(model.UserName);
+                        IdentityResult x = await _userManager.AccessFailedAsync(user.Id);
+                        ModelState.AddModelError("", "Invalid username or password.");
+                    }
+                    catch (Exception e)
+                    {
+                        returnUrl = e.Message;
+                    }
                 }
             }
 
