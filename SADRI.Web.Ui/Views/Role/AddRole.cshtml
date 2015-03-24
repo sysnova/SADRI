@@ -1,8 +1,8 @@
-﻿@model SADRI.Web.Ui.ViewModels.RoleViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Add Role";
 }
+@model IEnumerable<SADRI.Web.Ui.ViewModels.RoleViewModel>
+
 <h2>@ViewBag.Title.</h2>
 @using (Html.BeginForm("AddRole", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -11,9 +11,9 @@
     <hr />
     @Html.ValidationSummary()
     <div class="form-group">
-        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.FirstOrDefault().Name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FirstOrDefault().Name, new { @class = "form-control", Value="" })
         </div>
     </div>
     
@@ -25,11 +25,11 @@
 }
     <h4>List of Roles.</h4>
     @{
-    var grid = new WebGrid(source: Model.ListRoles, canPage: false, canSort: false);
+    var grid = new WebGrid(source: Model, canPage: false, canSort: false);
     }
     @grid.GetHtml(columns: grid.Columns(
-        grid.Column("Name", "Role Name"),
-        grid.Column("Description", "Role Description")
+    grid.Column("Name", "Role Name", style:"col-sm"),
+    grid.Column("Description", "Role Description", style:"col-sm")
     ))
 
     @section Scripts {

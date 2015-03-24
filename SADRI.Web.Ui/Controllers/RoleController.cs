@@ -25,8 +25,7 @@ namespace SADRI.Web.Ui.Controllers
 
         public ActionResult AddRole()
         {
-            RoleViewModel model = GetRolesViewModel();
-            return View(model);
+            return View(GetRolesViewModel());
         }
 
         [HttpPost]
@@ -40,17 +39,24 @@ namespace SADRI.Web.Ui.Controllers
             }
             return View(model);
         }
-        
-        private RoleViewModel GetRolesViewModel()
+
+        private List<RoleViewModel> GetRolesViewModel()
         {
             IEnumerable<ApplicationRole> roles = Enumerable.Empty<ApplicationRole>();
             roles = _roleManager.Roles;
-            RoleViewModel roleViewModel = new RoleViewModel
+            
+            List<RoleViewModel> _rolesViewModel = new List<RoleViewModel>();
+            
+            foreach (ApplicationRole rol in roles)
             {
-                Name = "",
-                ListRoles = roles
-            };
-            return roleViewModel;
+                 _rolesViewModel.Add(new RoleViewModel()           
+                     {
+                        Name = rol.Name,
+                        Description = rol.Description
+                     });
+            }
+
+            return _rolesViewModel;
         }
     }
 }

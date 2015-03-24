@@ -22,3 +22,6 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Custom Style*/
+.col-sm { width: 150px; min-width: 90px; }
