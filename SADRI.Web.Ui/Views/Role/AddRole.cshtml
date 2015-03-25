@@ -23,7 +23,19 @@
         </div>
     </div>
 }
-    <h4>List of Roles.</h4>
+    <div class="form-group">
+        <h4>Autocomplete</h4>
+        <input type="text" id="mpvalue" name="mpvalue" />
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#mpvalue').autocomplete({
+                         source: '@Url.Action("GetRoles")', dropdownPosition: 'above'
+                    });
+            })
+            </script>
+    </div>
+
+<h4>List of Roles.</h4>
     @{
     var grid = new WebGrid(source: Model, canPage: false, canSort: false);
     }
@@ -33,5 +45,5 @@
     ))
 
     @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
     }

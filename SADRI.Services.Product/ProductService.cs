@@ -7,7 +7,7 @@ using SADRI.Domain.Entities;
 using SADRI.Domain.Interfaces;
 using SADRI.Services.Interfaces;
 
-namespace SADRI.Web.Ui.Services
+namespace SADRI.Services.ImplServices
 {
     public class ProductService : IProductService
     {

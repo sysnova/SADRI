@@ -16,7 +16,7 @@ namespace SADRI.Web.Ui.App_Start
     using Ninject.Web.Common;
 
     using SADRI.Services.Interfaces;
-    using SADRI.Web.Ui.Services;
+    using SADRI.Services.ImplServices;
     using System.Collections.Generic;
 
     //

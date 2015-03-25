@@ -40,6 +40,15 @@ namespace SADRI.Web.Ui.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public JsonResult GetRoles(string term)
+        {
+            var result = from r in _roleManager.Roles
+                         where r.Name.ToLower().Contains(term)
+                         select r.Name;
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         private List<RoleViewModel> GetRolesViewModel()
         {
             IEnumerable<ApplicationRole> roles = Enumerable.Empty<ApplicationRole>();
