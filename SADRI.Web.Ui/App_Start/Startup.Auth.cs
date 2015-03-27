@@ -70,6 +70,7 @@ namespace SADRI.Web.Ui
             //   appSecret: "");
 
             //app.UseGoogleAuthentication();
+
         }
     }
 }

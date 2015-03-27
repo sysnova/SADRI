@@ -27,6 +27,9 @@ namespace SADRI.Web.Ui.App_Start
     using SharpArch.NHibernate;
     using NHibernate;
     //
+    //SiteMap
+    using MvcSiteMapProvider.Loader;
+    //
 
     public static class NinjectWebCommon 
     {
@@ -73,6 +76,7 @@ namespace SADRI.Web.Ui.App_Start
                 kernel.Bind<IAuthenticationManager>().ToMethod(x => HttpContext.Current.GetOwinContext().Authentication);
                 //
                 RegisterServices(kernel);
+                
                 return kernel;
             }
             catch
@@ -95,9 +99,11 @@ namespace SADRI.Web.Ui.App_Start
             var modules = new List<INinjectModule>
                 {
                     new RepositoryModule(),
+                    new MvcSiteMapProviderModule(),
                     new LoggingModule()
                 };
             kernel.Load(modules);
+            MvcSiteMapProvider.SiteMaps.Loader = kernel.Get<ISiteMapLoader>();
         }        
     }
 }

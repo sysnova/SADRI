@@ -61,14 +61,14 @@ namespace SADRI.Infrastructure.Data
         */
         public IList<T> GetAll()
         {
-            using (var transaction = Session.BeginTransaction())
-            {
+            //using (var transaction = Session.BeginTransaction())
+            //{
                 IList<T> returnVal = Session.CreateCriteria(typeof(T)).List<T>();
 
-                transaction.Commit();
+                //transaction.Commit();
 
                 return returnVal;
-            }
+            //}
 
         }
 

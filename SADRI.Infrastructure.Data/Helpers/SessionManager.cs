@@ -40,7 +40,7 @@ namespace SADRI.Infrastructure.Data
             _configuration = new NHibernate.Cfg.Configuration();
             _configuration.Configure();
             _sessionFactory = Fluently.Configure(_configuration)
-                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ProductMap>())
+                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<CategoryMap>())
                  .BuildSessionFactory();
         }
         #endregion
