@@ -70,7 +70,9 @@ namespace SADRI.Web.Ui
             //   appSecret: "");
 
             //app.UseGoogleAuthentication();
-
-        }
+            app.UseGoogleAuthentication(
+                clientId: "597826663274-sj9ov94qn2mb8gfroreqlpmla9b2j702.apps.googleusercontent.com",
+                clientSecret: "TSIkeUMFK_dLbuL03ANgIzix");
+            }
     }
 }

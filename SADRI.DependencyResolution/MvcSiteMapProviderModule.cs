@@ -24,7 +24,7 @@ namespace SADRI.Infrastructure.DependencyResolution
             bool enableLocalization = true;
             string absoluteFileName = HostingEnvironment.MapPath("~/Mvc.sitemap");
             TimeSpan absoluteCacheExpiration = TimeSpan.FromMinutes(5);
-            bool visibilityAffectsDescendants = true;
+            bool visibilityAffectsDescendants = false; //antes era true, supuestamente es para Override Visibility Node
             bool useTitleIfDescriptionNotProvided = true;
 
             bool securityTrimmingEnabled = true; //seguridad por Attribute
@@ -71,8 +71,9 @@ namespace SADRI.Infrastructure.DependencyResolution
                 excludeTypes,
                 string.Empty);
 
+            //Customizacion de VisibilityProvider
             this.Kernel.Bind<ISiteMapNodeVisibilityProviderStrategy>().To<SiteMapNodeVisibilityProviderStrategy>()
-                .WithConstructorArgument("defaultProviderName", string.Empty);
+                .WithConstructorArgument("defaultProviderName", "SADRI.Infrastructure.DependencyResolution.MyCustomVisibilityProvider, SADRI.DependencyResolution");
 
             this.Kernel.Bind<ControllerBuilder>().ToConstant(ControllerBuilder.Current);
 

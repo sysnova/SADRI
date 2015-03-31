@@ -10,8 +10,8 @@
             <mvcSiteMapNode title="Register" controller="Account" action="Register"/>
             <mvcSiteMapNode title="Login" controller="Account" action="Login"/>
         </mvcSiteMapNode>
-    <mvcSiteMapNode title="ABMC Product" controller="Product" action="Index" roles="User"/>
-        <mvcSiteMapNode title="ABMC Roles" controller="Role" action="AddRole" roles="Admin"/>
+    <mvcSiteMapNode title="ABMC Product" controller="Product" action="Index" roles="User" />
+    <mvcSiteMapNode title="ABMC Roles" controller="Role" action="AddRole" roles="Admin" visibility="Condition1"/>
     </mvcSiteMapNode>
 </mvcSiteMap>
   

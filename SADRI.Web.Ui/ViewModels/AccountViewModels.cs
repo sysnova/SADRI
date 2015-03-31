@@ -23,6 +23,10 @@ namespace SADRI.Web.Ui.ViewModels
         [Display(Name = "Rol")]
         public string Rol { get; set; }
 
+        [Required]
+        [Display(Name = "External Login")]
+        public string External { get; set; }
+
     }
     public class LoginViewModel
     {
@@ -38,4 +42,5 @@ namespace SADRI.Web.Ui.ViewModels
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+
 }

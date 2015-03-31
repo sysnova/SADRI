@@ -94,6 +94,7 @@
     <Compile Include="CommonConventions.cs" />
     <Compile Include="LoggingModule.cs" />
     <Compile Include="MvcSiteMapProviderModule.cs" />
+    <Compile Include="MyCustomVisibilityProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryModule.cs" />
   </ItemGroup>
