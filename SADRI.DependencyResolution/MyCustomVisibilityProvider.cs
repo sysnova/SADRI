@@ -9,6 +9,7 @@ namespace SADRI.Infrastructure.DependencyResolution
         public override bool IsVisible(ISiteMapNode node, IDictionary<string, object> sourceMetadata)
         {
             string visibility = string.Empty;
+            
             //Se pasa por parámetro en la llamada al SiteMap. _Layout.
             var value = sourceMetadata["user"];
 

@@ -22,9 +22,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+    </div>
+    <div id="footer">
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
+        @RenderSection("footer", false)
     </div>
     @RenderSection("scripts", required: false)
 </body>

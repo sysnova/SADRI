@@ -7,7 +7,7 @@ using SADRI.Services.Interfaces;
 
 namespace SADRI.Web.Ui.Filters
 {
-    public class CheckPermissionAttribute : AuthorizeAttribute
+    public class CheckPermissionAttribute : AuthorizeAttribute //SiteMapSecurityt Trimming implementa AttributeAuthorize o su Custom
     {
         private string _role;
         public CheckPermissionAttribute(string RolCustom)
@@ -23,6 +23,7 @@ namespace SADRI.Web.Ui.Filters
 
             if ((HttpContext.Current.User.IsInRole(_role)) && (HttpContext.Current.User.Identity.IsAuthenticated))
             {
+                //if (HttpContext.Current.User.Identity.Name == "lgonzalez13U") { return false; }
                 authorized = true;
             }
 
