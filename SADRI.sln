@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SADRI.Web.Ui", "SADRI.Web.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SADRI.Services.ImplServices", "SADRI.Services.Product\SADRI.Services.ImplServices.csproj", "{EFB18F2B-F782-4095-82E2-AF2AD28A2680}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SADRI.Infrastructure.Workflow", "SADRI.Infrastructure.Workflow\SADRI.Infrastructure.Workflow.csproj", "{153131F1-60CF-4F46-AC74-DFFA14E07687}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{EFB18F2B-F782-4095-82E2-AF2AD28A2680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFB18F2B-F782-4095-82E2-AF2AD28A2680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFB18F2B-F782-4095-82E2-AF2AD28A2680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{153131F1-60CF-4F46-AC74-DFFA14E07687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153131F1-60CF-4F46-AC74-DFFA14E07687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{153131F1-60CF-4F46-AC74-DFFA14E07687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{153131F1-60CF-4F46-AC74-DFFA14E07687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{E9BA017C-0FCB-49E5-AFD3-EE8C53E0F083} = {175356A2-503E-4DFC-A606-F42463DB861A}
 		{0140DE4C-B9DA-45C5-B1CD-46B909A8D362} = {6EA28FE8-1524-4085-9F71-D3CA08834740}
 		{EFB18F2B-F782-4095-82E2-AF2AD28A2680} = {175356A2-503E-4DFC-A606-F42463DB861A}
+		{153131F1-60CF-4F46-AC74-DFFA14E07687} = {89CE1F2E-8B0E-418B-9E8A-639D72D6DA0F}
 	EndGlobalSection
 EndGlobal

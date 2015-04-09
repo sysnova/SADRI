@@ -189,10 +189,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController\WizardController.cs" />
     <Compile Include="Controllers\CustomErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CheckPermissionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -296,10 +298,14 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\_BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Shared\_smNextPrevControl.cshtml" />
+    <Content Include="Views\User\Init.cshtml" />
+    <Content Include="Views\User\Step1.cshtml" />
+    <Content Include="Views\User\Step2.cshtml" />
+    <Content Include="Views\User\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

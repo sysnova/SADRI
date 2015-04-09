@@ -1,0 +1,25 @@
+﻿
+<div class="form-group">
+    <div class="text-danger">
+        @Html.ValidationMessage("CustomErrorService")
+    </div>
+</div>
+
+<div class="form-group">
+
+    @using (Html.BeginForm("Wizard", "User", FormMethod.Post, new { @class = "form-horizontal", @id = "frmPrev" }))
+    {
+        <div class="col-md-offset-2 col-md-10">
+            @foreach (var permission in ViewBag.PermittedTriggers)
+            {
+                if (@permission.ToString() == "Next")
+                { <input name="btn_Next" type="button" id="btn_Next" class="btn btn-default" value="Next" /> }
+                if (@permission.ToString() == "Previous")
+                { <input name="btn_Prev" type="submit" id="btn_Prev" class="btn btn-default" value="Previous" /> }
+                if (@permission.ToString() == "New")
+                { <input name="btn_New" type="button" id="btn_New" class="btn btn-default" value="New" /> }
+            }
+            <input name="submitPrev" id="ActionPrev" type="hidden" value="" />
+        </div>
+    }
+</div>

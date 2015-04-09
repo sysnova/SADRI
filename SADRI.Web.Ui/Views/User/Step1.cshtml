@@ -1,0 +1,53 @@
+﻿@model SADRI.Web.Ui.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Step1";
+}
+<h2>Step1</h2>
+
+@using (Html.BeginForm("Wizard", "User", FormMethod.Post, new { @class = "form-horizontal", @id = "frmWizard" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+        <input name="submitNext" id="ActionNext" type="hidden" value="" />
+    </div>
+}
+@{ Html.RenderPartial("../Shared/_smNextPrevControl");}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn_Next").click(function (e) {
+                $("#ActionNext").val("Next");
+                $("form#frmWizard").submit();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btn_New").click(function (e) {
+                $("#ActionNext").val("New");
+                $("form#frmWizard").submit();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btn_Prev").click(function (e) {
+                $("#ActionPrev").val("Previous");
+            });
+        });
+    </script>
+}
+

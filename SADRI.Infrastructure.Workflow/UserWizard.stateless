@@ -1,0 +1,30 @@
+<!--  
+Stateless Designer statemachine.
+For more information: http://statelessdesigner.codeplex.com/
+-->
+<statemachine xmlns="http://statelessdesigner.codeplex.com/Schema">
+  <settings>
+    <itemname>WizardUser</itemname>
+    <namespace>Workflows</namespace>
+    <class>public</class>
+  </settings>
+  <triggers>     
+    <trigger>Next</trigger>
+    <trigger>Previous</trigger>
+    <trigger>New</trigger>
+  </triggers>
+  <states>     
+    <state start="yes">Init</state>
+    <state>Step1</state>
+    <state>Step2</state>
+    <state>Finish</state>
+  </states>
+  <transitions>
+    <transition trigger="Next" from="Init" to="Step1" />
+    <transition trigger="Previous" from="Step1" to="Init" />
+    <transition trigger="Next" from="Step1" to="Step2" />
+    <transition trigger="Previous" from="Step2" to="Step1" />
+    <transition trigger="Next" from="Step2" to="Finish" />
+    <transition trigger="New" from="Finish" to="Init" />
+  </transitions>
+</statemachine>

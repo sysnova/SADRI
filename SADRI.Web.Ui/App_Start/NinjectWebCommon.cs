@@ -18,6 +18,7 @@ namespace SADRI.Web.Ui.App_Start
     using SADRI.Services.Interfaces;
     using SADRI.Services.ImplServices;
     using System.Collections.Generic;
+    // Workflow
 
     //
     using Microsoft.Owin.Security;
@@ -64,15 +65,15 @@ namespace SADRI.Web.Ui.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                //REGISTER USER
+                //REGISTER USER - TODO: Ver de pasar las dependencias de Identity a NinjectModules
                 kernel.Bind<ISession>().ToMethod(x => NHibernateSession.Current);
                 kernel.Bind(typeof(IUserStore<ApplicationUser>)).To(typeof(UserStore<ApplicationUser>)).InRequestScope();
                 kernel.Bind<ApplicationUserManager>().ToSelf().InRequestScope();
                 //
-                //ADD ROLE
+                //ADD ROLE - TODO: Ver de pasar las dependencias de Identity a NinjectModules
                 kernel.Bind(typeof(IRoleStore<ApplicationRole, string>)).To(typeof(RoleStore<ApplicationRole>)).InRequestScope();
                 //
-                //AUTHENTICATION_MANAGER
+                //AUTHENTICATION_MANAGER - TODO: Ver de pasar las dependencias de Identity a NinjectModules
                 kernel.Bind<IAuthenticationManager>().ToMethod(x => HttpContext.Current.GetOwinContext().Authentication);
                 //
                 RegisterServices(kernel);
@@ -100,7 +101,8 @@ namespace SADRI.Web.Ui.App_Start
                 {
                     new RepositoryModule(),
                     new MvcSiteMapProviderModule(),
-                    new LoggingModule()
+                    new LoggingModule(),
+                    new WorkflowModule()
                 };
             kernel.Load(modules);
             MvcSiteMapProvider.SiteMaps.Loader = kernel.Get<ISiteMapLoader>();

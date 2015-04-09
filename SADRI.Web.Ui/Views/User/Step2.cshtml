@@ -1,0 +1,44 @@
+﻿@model SADRI.Web.Ui.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Step2";
+}
+<h2>Step2</h2>
+@using (Html.BeginForm("Wizard", "User", FormMethod.Post, new { @class = "form-horizontal", @id = "frmWizard" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rol, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rol, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
+        </div>
+        <input name="submitNext" id="ActionNext" type="hidden" value="" />
+    </div>
+
+}
+@{ Html.RenderPartial("../Shared/_smNextPrevControl");}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn_Next").click(function (e) {
+                $("#ActionNext").val("Next");
+                $("form#frmWizard").submit();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btn_New").click(function (e) {
+                $("#ActionNext").val("New");
+                $("form#frmWizard").submit();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btn_Prev").click(function (e) {
+                $("#ActionPrev").val("Previous");
+            });
+        });
+    </script>
+}

@@ -97,8 +97,13 @@
     <Compile Include="MyCustomVisibilityProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryModule.cs" />
+    <Compile Include="WorkflowModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SADRI.Domain.Entities\SADRI.Domain.Entities.csproj">
+      <Project>{7a6aae23-d1fd-4d11-82e1-eb7f51acd73b}</Project>
+      <Name>SADRI.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SADRI.Domain.Interfaces\SADRI.Domain.Interfaces.csproj">
       <Project>{1ff160f3-2eed-4914-9353-ad37703ed994}</Project>
       <Name>SADRI.Domain.Interfaces</Name>
@@ -114,6 +119,10 @@
     <ProjectReference Include="..\SADRI.Infrastructure.Logging\SADRI.Infrastructure.Logging.csproj">
       <Project>{725e7df6-605e-4f7d-a0a6-ba9759f906a6}</Project>
       <Name>SADRI.Infrastructure.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SADRI.Infrastructure.Workflow\SADRI.Infrastructure.Workflow.csproj">
+      <Project>{153131f1-60cf-4f46-ac74-dffa14e07687}</Project>
+      <Name>SADRI.Infrastructure.Workflow</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
