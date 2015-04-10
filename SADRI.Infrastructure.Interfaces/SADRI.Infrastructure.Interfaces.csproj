@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ILoggingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflows\IWorkflowFactory.cs" />
     <Compile Include="Workflows\IWorkflowWizardGeneric.cs" />
     <Compile Include="Workflows\IWorkflowWizardUser.cs" />
   </ItemGroup>

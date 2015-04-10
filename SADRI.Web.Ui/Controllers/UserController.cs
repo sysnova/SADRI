@@ -11,12 +11,14 @@ using SADRI.Domain.Entities.Enums;
 
 namespace SADRI.Web.Ui.Controllers
 {
-    public class UserController : WizardController<RegisterViewModel, IWorkflowWizardUser>
+    public class UserController : WizardController<RegisterViewModel, IWorkflowWizardUser, IWorkflowWizardGenericFactory>
     {
         // Inyecto la StateMachine en el Constructor del Controller.
         // Lo comento porque si no me estaría Reseteando el Estado en cada Request.
-        //public UserController(IWorkflowWizardUser _smInject) : base (_smInject)
+
+        //public UserController(IWorkflowWizardGenericFactory factory) : base (factory)
         //{
+
         //}
 
         [AllowAnonymous]

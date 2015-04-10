@@ -10,9 +10,8 @@ using SADRI.Infrastructure.Interfaces;
 using SADRI.Infrastructure.Workflow;
 using SADRI.Domain.Entities.Enums;
 //
-using System.Web;
+using Ninject.Extensions.Factory;//Extension para crear Factories.
 //
-
 
 namespace SADRI.Infrastructure.DependencyResolution
 {
@@ -27,9 +26,11 @@ namespace SADRI.Infrastructure.DependencyResolution
             //Bind(typeof(IRepository<>)).To(typeof(NHibernateRepository<>));
             
             //Bind<IWorkflowWizardUser>().To<WizardUser>();
-
-            Bind<IWorkflowWizardUser>().To<WizardUser>();
-                //.WithConstructorArgument("_state", States.UserWizard.Step1); //
+               //.WithConstructorArgument("_state", States.UserWizard.Step1);
+            
+            Bind<IWorkflowWizardGenericFactory>().ToFactory();
+            //Bind<IWorkflowWizardUser>().To<WizardUser>();
+            Bind<IWorkflowWizardGeneric>().To<WizardUser>();
  
         }
     }

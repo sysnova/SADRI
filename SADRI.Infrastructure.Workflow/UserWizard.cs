@@ -79,12 +79,21 @@ namespace SADRI.Infrastructure.Workflow
             new FaultCode("Transition Error - " + Trigger));
         };
 
-        public WizardUser()
-            : this(States.UserWizard.Init)
+        //public WizardUser()
+        //    : this(States.UserWizard.Init)
+        //{
+        //}
+        public WizardUser(string _metaState)
         {
-        }
-        public WizardUser(States.UserWizard _state)
-        {
+            States.UserWizard _state;
+            
+            //Crear un Binding
+            if (_metaState == "Init") _state = States.UserWizard.Init;
+            else if (_metaState == "Step1") _state = States.UserWizard.Step1;
+            else if (_metaState == "Step2") _state = States.UserWizard.Step2;
+            else _state = States.UserWizard.Finish;
+            //Fin Binding
+
             stateMachine = new StateMachine<States.UserWizard, Triggers.UserWizard>(_state);
 
             paramNextTrigger = stateMachine.SetTriggerParameters<Hashtable>(Triggers.UserWizard.Next);
