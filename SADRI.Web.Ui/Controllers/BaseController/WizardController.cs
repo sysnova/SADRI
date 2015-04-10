@@ -43,21 +43,28 @@ namespace SADRI.Web.Ui.Controllers.BaseController
         // GET: Base
         public ActionResult Wizard()
         {
-            //TODO: Mover a un Action especifico que reciba un Model instanciado
+            Hashtable Response = StepInit("Init", null);
+            return View((string)Response["Step"],(T) Response["Model"]);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        // GET: Base
+        public ActionResult LoadWizard(string step)
+        {
             RegisterViewModel model = new RegisterViewModel();
-            model.UserName = "lgonzalez10";
+            model.UserName = "lgonzalez";
             model.Password = "Coco123";
             model.ConfirmPassword = "Coco123";
             model.Rol = "Admin";
-            //
-            return View(StepInit("Step2", model)); //TODO: Ejemplo de instanciacion del Workflow.
+            Hashtable Response = StepInit(step, model);
+            return View((string)Response["Step"], (T)Response["Model"]); //TODO: Ejemplo de instanciacion del Workflow.
         }
-        //public abstract ActionResult GetIndex();
 
         [HttpPost]
         public abstract ActionResult Wizard(T model, string submitNext, string submitPrev);
 
-        private string StepInit(string _step, RegisterViewModel model)
+        private Hashtable StepInit(string _step, RegisterViewModel model)
         {
 
                 #region Documentacion Reflection. Crear instancias, ejecutar, todo Generic
@@ -86,11 +93,16 @@ namespace SADRI.Web.Ui.Controllers.BaseController
                 //Borro el modelo de datos ya que estamos haciendo una nueva instancia.
                 //if (model == null) TempData["Model"] = null;
                 //else TempData["Model"] = model;
+                
                 TempData["Model"] = model;
 
                 ViewBag.PermittedTriggers = StateMachineManager_PermittedTriggers;
+
+                Hashtable Response = new Hashtable();
+                Response["Model"] = model;
+                Response["Step"] = StateMachineManager_GetState;
             
-                return StateMachineManager_GetState;
+                return Response;
         }
 
         public T StateMachineManager_ViewModel
