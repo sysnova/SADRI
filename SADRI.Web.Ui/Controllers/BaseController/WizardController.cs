@@ -43,14 +43,14 @@ namespace SADRI.Web.Ui.Controllers.BaseController
         // GET: Base
         public ActionResult Wizard()
         {
-            Hashtable Response = StepInit("Init", null);
+            Hashtable Response = StepInit(States.UserWizard.Init, null);
             return View((string)Response["Step"],(T) Response["Model"]);
         }
 
         [AllowAnonymous]
         [HttpGet]
         // GET: Base
-        public ActionResult LoadWizard(string step)
+        public ActionResult LoadWizard(States.UserWizard step)
         {
             RegisterViewModel model = new RegisterViewModel();
             model.UserName = "lgonzalez";
@@ -64,7 +64,7 @@ namespace SADRI.Web.Ui.Controllers.BaseController
         [HttpPost]
         public abstract ActionResult Wizard(T model, string submitNext, string submitPrev);
 
-        private Hashtable StepInit(string _step, RegisterViewModel model)
+        private Hashtable StepInit(States.UserWizard _step, RegisterViewModel model)
         {
 
                 #region Documentacion Reflection. Crear instancias, ejecutar, todo Generic

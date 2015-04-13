@@ -9,6 +9,6 @@ namespace SADRI.Infrastructure.Interfaces
 {
     public interface IWorkflowWizardGenericFactory
     {
-        IWorkflowWizardGeneric CreateWorkflow(string _metaState);
+        IWorkflowWizardGeneric CreateWorkflow(States.UserWizard _state);
     }
 }

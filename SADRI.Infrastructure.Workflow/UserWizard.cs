@@ -83,16 +83,8 @@ namespace SADRI.Infrastructure.Workflow
         //    : this(States.UserWizard.Init)
         //{
         //}
-        public WizardUser(string _metaState)
-        {
-            States.UserWizard _state;
-            
-            //Crear un Binding
-            if (_metaState == "Init") _state = States.UserWizard.Init;
-            else if (_metaState == "Step1") _state = States.UserWizard.Step1;
-            else if (_metaState == "Step2") _state = States.UserWizard.Step2;
-            else _state = States.UserWizard.Finish;
-            //Fin Binding
+        public WizardUser(States.UserWizard _state)
+        {            
 
             stateMachine = new StateMachine<States.UserWizard, Triggers.UserWizard>(_state);
 
